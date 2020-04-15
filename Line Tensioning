@@ -1,0 +1,29 @@
+#include <Servo.h>
+Servo servo[4]; //array command for servo
+
+void setup() {
+servo[0].attach(3);
+servo[0].write(0);
+servo[1].attach(5);
+servo[1].write(90);
+servo[2].attach(6);
+servo[2].write(180); 
+servo[3].attach(9);  
+pinMode(13, OUTPUT); // pin 13 LED
+}
+
+void loop() {
+  digitalWrite(13,HIGH);
+  for (int i = 0; i <= 180; i++){
+    servo[3].write(i);
+    delay(10);
+  }
+delay (1000);
+
+digitalWrite(13,LOW);
+for (int i = 180; i >= 0; i--) {
+  servo[3].write(i);
+  delay(10)
+}
+delay(1000);
+}
