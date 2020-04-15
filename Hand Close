@@ -1,0 +1,25 @@
+#include <Servo.h>             //Servo library
+         
+Servo servo[6]; // Servo Array  
+ 
+void setup() {
+  servo[1].attach(3); // THUMB
+  servo[1].write(165);
+  servo[2].attach(5); // INDEX
+  servo[2].write(165);
+  servo[3].attach(6); // MIDDLE
+  servo[3].write(165);
+  servo[4].attach(9); // RING
+  servo[4].write(165);
+  servo[5].attach(10); // LITTLE
+  servo[5].write(165);
+  servo[6].attach(11); // LITTLE
+  servo[6].write(90);
+ 
+} 
+  
+void loop() {
+
+}
+
+  
