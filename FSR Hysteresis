@@ -1,0 +1,53 @@
+
+uint16_t getOutputLevel( uint16_t inputLevel ) {
+  
+  //% between two end points
+  const uint16_t margin = 1 ;   //  +/- 10
+
+  // Output levels = 2, 1 for 0 degress, 1 for 180 degrees .
+  const uint16_t numberOfLevelsOutput = 10;  //
+
+ //450 avg max of no force applied, 550 avg max of force applied
+  const uint16_t endPointInput[ numberOfLevelsOutput + 1 ] = {0, 363, 378, 389, 403, 414, 425, 436, 450, 458, 475} ;
+
+  // initial output level (usually zero)
+  const  uint16_t initialOutputLevel = 0 ;
+
+ // the current output level is retained for the next calculation.
+  static uint16_t currentOutputLevel = initialOutputLevel ;
+
+  // get lower and upper bounds for currentOutputLevel
+  uint16_t lb = endPointInput[ currentOutputLevel ] ;
+  
+    if ( currentOutputLevel > 0 ) lb -= margin  ;   // subtract margin
+
+  uint16_t ub = endPointInput[ currentOutputLevel + 1 ] ;
+  if ( currentOutputLevel < numberOfLevelsOutput ) ub +=  margin  ;  // add margin
+
+ // is input is between the outer margins for current output value
+  if ( inputLevel < lb || inputLevel > ub ) {
+    // determine new output level by scanning endPointInput array
+    uint16_t i;
+    for ( i = 0 ; i < numberOfLevelsOutput ; i++ ) {
+      if ( inputLevel >= endPointInput[ i ] && inputLevel <= endPointInput[ i + 1 ] ) break ;
+    }
+    currentOutputLevel = i ;
+  }
+  return currentOutputLevel ;
+}
+
+void setup() {
+  Serial.begin(9600);
+}
+void loop() {
+
+  Serial.println(  getOutputLevel( analogRead(A0) ) ) ;
+
+  delay(80); 
+
+
+
+
+
+
+ 
