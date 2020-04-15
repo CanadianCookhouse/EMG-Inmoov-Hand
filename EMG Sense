@@ -1,0 +1,52 @@
+
+#include <Servo.h>
+
+Servo myServo1;
+Servo myServo2;
+Servo myServo3;
+Servo myServo4;
+Servo myServo5;
+Servo myServo6;
+
+void setup() {
+
+Serial.begin(9600);
+
+myServo1.attach(3);
+myServo2.attach(5);
+myServo3.attach(6);
+myServo4.attach(9);
+myServo5.attach(10);
+myServo6.attach(11);}
+
+
+void loop() {
+  
+  // Reads the input on the analog pin 0,
+  // recieves the analog reading (from 0 - 1023):
+
+  int sensorValue1 = analogRead(A0);
+
+  // the analog reading from EMG sensor 
+  // is then compared with pre-set threshold:
+
+  if (sensorValue1 > 320){myServo1.write(180);myServo2.write(180);myServo3.write(180);myServo4.write(180);myServo5.write(180);myServo6.write(90);}
+
+  else if (sensorValue1 < 340) {myServo1.write(0);myServo2.write(0);myServo3.write(0);myServo4.write(0);myServo5.write(0);myServo6.write(0);}
+
+ if (sensorValue1 > 330){
+  delay(2000);}
+
+  
+  // print out the FSR values of EMG sensor:
+
+  Serial.print(sensorValue1);
+  Serial.println("   ");
+
+// provides a reasonable dalay for screen readibility.
+// and saves the electric power on computing:
+
+
+  delay(10);
+
+  }
