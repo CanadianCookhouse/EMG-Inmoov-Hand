@@ -1,0 +1,27 @@
+#include <Servo.h>             //Servo library
+                
+Servo servo1; //thumb
+Servo servo2; //index
+Servo servo3 ; //middle
+
+unsigned long handOpen = millis();
+
+void setup() {
+  servo1.attach(3); // THUMB
+
+  servo2.attach(5); // INDEX
+
+  servo3.attach(6); // MIDDLE
+  
+
+} 
+  
+void loop() {
+
+servo1.write(180);
+  if ( millis() - handOpen >= 1000UL ){servo2.write(165);}
+  if ( millis() - handOpen >= 1000UL ){servo3.write(180);}
+
+}
+
+  
