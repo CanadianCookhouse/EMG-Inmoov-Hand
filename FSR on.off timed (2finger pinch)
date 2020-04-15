@@ -1,0 +1,36 @@
+#include <Servo.h>             //Servo library
+                
+Servo servo1; // Servo Array  
+Servo servo2;
+unsigned long WaitAutoOff = millis();
+ 
+void setup() {
+Serial.begin(115200);
+ servo1.attach(3); // THUMB
+ servo2.attach(5);
+} 
+  
+void loop() {
+
+
+int sensorValue1;
+float force;
+
+sensorValue1 = analogRead(A0);
+force = sensorValue1/100;
+
+Serial.println(force);
+
+delay(10);
+
+servo1.write(180);
+servo2.write(180);
+
+if ( millis() - WaitAutoOff >= 15000UL )
+{
+    if (force > 0) 
+    {
+      servo1.write(0);
+    }    
+}
+}
